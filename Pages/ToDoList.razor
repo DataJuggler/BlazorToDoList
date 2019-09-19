@@ -1,0 +1,195 @@
+﻿@page "/ToDoList"
+
+@using DataJuggler.UltimateHelper.Core
+@using System.Collections.Generic
+@using ObjectLibrary.BusinessObjects
+@using BlazorToDo.Data.Services
+@inject ToDoService ToDoService
+
+@if (ListHelper.HasOneOrMoreItems(todos))
+{
+    <h3>To Do List - @CompletedCount items completed of @Count</h3>
+}
+else
+{
+    <h3>To Do List</h3>
+}
+
+<input placeholder="Enter Title For New Item" @bind="newTodoTitle" />
+<button @onclick="AddToDo">Add ToDo</button>
+
+<div class="clear"></div>
+
+@if (ListHelper.HasOneOrMoreItems(todos))
+{
+    // iterate the ToDos
+    @foreach (var todo in todos)
+    {
+        <div class="width800">
+            <input type="checkbox" @bind="todo.IsDone" />
+            <input class="todoitem" @bind="todo.Title" />
+            <button class="removebutton" @onclick="@(e => RemoveToDo(todo))" ></button>
+        </div>
+    }
+}
+else
+{
+    <p>You are all caught up or haven't started your to do list.</p>
+}
+
+@code {
+
+    // locals
+    List<ObjectLibrary.BusinessObjects.ToDo> todos = null;
+    private DataWatcher dataWatcher = null;
+    private string newTodoTitle;
+
+    /// <summary>
+    /// This event fires at start up
+    /// </summary>
+    /// <returns></returns>
+    protected override async Task OnInitializedAsync()
+    {
+        // load the ToDoList
+        todos = await GetToDoList();
+    }
+
+    /// <summary>
+    /// Add a new ToDo
+    /// </summary>
+    private async void AddToDo()
+    {
+        // local
+        bool saved = false;
+
+        // if the Title exists
+        if (TextHelper.Exists(newTodoTitle))
+        {
+            // Create a new ToDo
+            saved = await ToDoService.CreateToDo(newTodoTitle);
+
+            // if saved
+            if (saved)
+            {
+                // load the ToDoList
+                todos = await GetToDoList();
+
+                // Erase newTodoTitle
+                newTodoTitle = string.Empty;
+            }
+        }
+    }
+
+    private async Task<List<ToDo>> GetToDoList()
+    {
+        // load the List
+        List<ToDo> toDos = await ToDoService.GetToDoList();
+
+        // Create the dataWatcher
+        dataWatcher = new DataWatcher();
+
+        // Watch these to
+        dataWatcher.Watch(toDos);
+
+        // return the list
+        return toDos;
+    }
+
+
+    private async void RemoveToDo(ToDo toDo)
+    {
+        // local
+        bool deleted = false;
+
+        // If the toDo object exists
+        if (NullHelper.Exists(toDo))
+        {
+            // Create a new ToDo
+            deleted = await ToDoService.RemoveToDo(toDo);
+
+            // if deleted
+            if (deleted)
+            {
+                // load the ToDoList
+                todos = await GetToDoList();
+            }
+        }
+    }
+
+    #region Properties
+
+    #region CompletedCount
+    /// <summary>
+    /// This read only property returns the number of CompletedToDo items
+    /// </summary>
+    public int CompletedCount
+    {
+        get
+        {
+            // initial value
+            int completedCount = 0;
+
+            // if there are one or more items
+            if (ListHelper.HasOneOrMoreItems(todos))
+            {
+                // get the count of completed items
+                completedCount = todos.Where(x => x.IsDone == true).Count();
+            }
+
+            // return value
+            return completedCount;
+        }
+    }
+    #endregion
+
+    #region Count
+    /// <summary>
+    /// This read only property returns the number of to do list items
+    /// </summary>
+    public int Count
+    {
+        get
+        {
+            // initial value
+            int count = 0;
+
+            // if there are one or more items
+            if (ListHelper.HasOneOrMoreItems(todos))
+            {
+                // get the count of items
+                count = todos.Count();
+            }
+
+            // return value
+            return count;
+        }
+    }
+    #endregion
+
+    #region UncompletedCount
+    /// <summary>
+    /// This read only property returns the number of ToDo list items that are not completed.
+    /// </summary>
+    public int UncompletedCount
+    {
+        get
+        {
+            // initial value
+            int uncompletedCount = 0;
+
+            // if there are one or more items
+            if (ListHelper.HasOneOrMoreItems(todos))
+            {
+                // get the count of uncompleted items
+                uncompletedCount = todos.Where(x => x.IsDone == false).Count();
+            }
+
+            // return value
+            return uncompletedCount;
+        }
+    }
+    #endregion
+
+    #endregion
+
+}
