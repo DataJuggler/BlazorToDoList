@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <Compile Include="Data\Services\Connection.cs" />
-    <Compile Include="Data\Services\DataWatcher.cs" />
+    <Compile Include="Data\Services\ToDoDataWatcher.cs" />
     <Compile Include="Data\Services\ToDoService.cs" />
   </ItemGroup>
 

@@ -18,7 +18,6 @@ namespace ObjectLibrary.BusinessObjects
         #region Private Variables
         private int id;
         private bool isDone;
-        private bool loading;
         private string title;
         private bool delete;
         #endregion
@@ -66,7 +65,7 @@ namespace ObjectLibrary.BusinessObjects
                     // set the value
                     isDone = value;
 
-                    // if the Callback exists
+                    // if the Callback exists and changes exist
                     if ((HasCallback) && (hasChanges))
                     {
                         // Set the Callback

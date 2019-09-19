@@ -17,12 +17,12 @@ using DataGateway;
 namespace BlazorToDo.Data.Services
 {
 
-    #region class DataWatcher
+    #region class ToDoDataWatcher
     /// <summary>
     /// This class is used to hold the delegates so when changes occur
     /// in a ToDo item, the values are saved.
     /// </summary>
-    public class DataWatcher
+    public class ToDoDataWatcher
     {
 
         #region Private Variables
@@ -35,7 +35,7 @@ namespace BlazorToDo.Data.Services
             /// <summary>
             /// This method Item Changed
             /// </summary>
-            public void ItemChanged(object itemChanged, ListChangeTypeEnum listChangeType)
+            public async void ItemChanged(object itemChanged, ListChangeTypeEnum listChangeType)
             {
                 // cast the item as a ToDo object
                 ToDo toDo = itemChanged as ToDo;
@@ -43,11 +43,8 @@ namespace BlazorToDo.Data.Services
                 // If the toDo object exists
                 if (NullHelper.Exists(toDo))
                 {
-                    // Create an instance of the Gateway
-                    Gateway gateway = new Gateway(Connection.Name);
-
-                    // perform the save
-                    gateway.SaveToDo(ref toDo);
+                    // perform the saved
+                    bool saved = await ToDoService.SaveToDo(toDo);
                 }
             }
             #endregion

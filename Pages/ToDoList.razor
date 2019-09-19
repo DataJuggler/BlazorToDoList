@@ -41,7 +41,7 @@ else
 
     // locals
     List<ObjectLibrary.BusinessObjects.ToDo> todos = null;
-    private DataWatcher dataWatcher = null;
+    private ToDoDataWatcher dataWatcher = null;
     private string newTodoTitle;
 
     /// <summary>
@@ -86,7 +86,7 @@ else
         List<ToDo> toDos = await ToDoService.GetToDoList();
 
         // Create the dataWatcher
-        dataWatcher = new DataWatcher();
+        dataWatcher = new ToDoDataWatcher();
 
         // Watch these to
         dataWatcher.Watch(toDos);
