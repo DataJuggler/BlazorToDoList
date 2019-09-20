@@ -3,14 +3,9 @@
 #region using statements
 
 using DataJuggler.UltimateHelper.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ObjectLibrary.BusinessObjects;
-using ObjectLibrary.Delegates;
-using ObjectLibrary.Enumerations;
-using DataGateway;
+using DataJuggler.Net.Core.Enumerations;
+using System.Collections.Generic;
 
 #endregion
 
@@ -35,7 +30,7 @@ namespace BlazorToDo.Data.Services
             /// <summary>
             /// This method Item Changed
             /// </summary>
-            public async void ItemChanged(object itemChanged, ListChangeTypeEnum listChangeType)
+            public async void ItemChanged(object itemChanged, ChangeTypeEnum listChangeType)
             {
                 // cast the item as a ToDo object
                 ToDo toDo = itemChanged as ToDo;

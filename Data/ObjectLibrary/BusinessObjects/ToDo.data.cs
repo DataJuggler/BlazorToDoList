@@ -3,8 +3,8 @@
 #region using statements
 
 using System;
-using ObjectLibrary.Enumerations;
-using ObjectLibrary.Delegates;
+using DataJuggler.Net.Core.Enumerations;
+using DataJuggler.Net.Core.Delegates;
 
 #endregion
 
@@ -69,7 +69,7 @@ namespace ObjectLibrary.BusinessObjects
                     if ((HasCallback) && (hasChanges))
                     {
                         // Set the Callback
-                        Callback(this, ListChangeTypeEnum.ItemChanged);    
+                        Callback(this, ChangeTypeEnum.ItemChanged);    
                     }
                 }
             }
@@ -94,7 +94,7 @@ namespace ObjectLibrary.BusinessObjects
                     if ((HasCallback) && (hasChanges))
                     {
                         // Set the Callback
-                        Callback(this, ListChangeTypeEnum.ItemChanged);    
+                        Callback(this, ChangeTypeEnum.ItemChanged);    
                     }
                 }
             }

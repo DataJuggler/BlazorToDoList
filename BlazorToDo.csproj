@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DataJuggler.Net.Core" Version="2.0.6-Rc1" />
+    <PackageReference Include="DataJuggler.Net.Core" Version="2.0.8-Rc1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-rc1.19456.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0-rc1-19462-10" />
   </ItemGroup>

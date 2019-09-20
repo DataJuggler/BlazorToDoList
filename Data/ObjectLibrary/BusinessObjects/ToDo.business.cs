@@ -3,7 +3,7 @@
 #region using statements
 
 using System;
-using ObjectLibrary.Delegates;
+using DataJuggler.Net.Core.Delegates;
 
 #endregion
 
@@ -16,7 +16,7 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
-        private ListChangedCallback callback;
+        private ItemChangedCallback callback;
         #endregion
 
         #region Constructor
@@ -47,7 +47,7 @@ namespace ObjectLibrary.BusinessObjects
             /// <summary>
             /// This property gets or sets the value for 'Callback'.
             /// </summary>
-            public ListChangedCallback Callback
+            public ItemChangedCallback Callback
             {
                 get { return callback; }
                 set { callback = value; }
