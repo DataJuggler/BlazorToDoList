@@ -2,16 +2,16 @@
 
 #region using statements
 
+using ApplicationLogicComponent.Connection;
 using DataJuggler.UltimateHelper.Core;
 using DataGateway;
 using ObjectLibrary.BusinessObjects;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.ComponentModel;
 
 #endregion
 
-namespace BlazorToDo.Data.Services
+namespace DataGateway.Services
 {
 
     #region class ToDoService
@@ -20,34 +20,8 @@ namespace BlazorToDo.Data.Services
     /// </summary>
     public class ToDoService
     {
+
         #region Methods
-            
-            #region CreateToDo(string title)
-            /// <summary>
-            /// This method is used to load the Site 
-            /// </summary>
-            /// <returns></returns>
-            public static Task<bool> CreateToDo(string title)
-            {
-                // initial value
-                bool saved = false;
-                
-                // Create a new instance of a 'Gateway' object, and set the connectionName
-                Gateway gateway = new Gateway(Connection.Name);
-                
-                // Create a new ToDo item
-                ObjectLibrary.BusinessObjects.ToDo toDo = new ToDo();
-                
-                // Set the Title
-                toDo.Title = title;
-                
-                // load the sites
-                saved = gateway.SaveToDo(ref toDo);
-                
-                // return the value of saved
-                return Task.FromResult(saved);
-            }
-            #endregion
             
             #region GetToDoList()
             /// <summary>
@@ -95,25 +69,22 @@ namespace BlazorToDo.Data.Services
             }
         #endregion
 
-            #region SaveToDo(toDo)
+            #region SaveToDo(ref ToDo toDo)
             /// <summary>
-            /// This method is used to delete a ToDo
+            /// This method is used to create ToDo objects
             /// </summary>
+            /// <param name="toDo">Pass in an object of type ToDo to save</param>
             /// <returns></returns>
-            public static Task<bool> SaveToDo(ToDo toDo)
+            public static Task<bool> SaveToDo(ref ToDo toDo)
             {
                 // initial value
                 bool saved = false;
                 
-                // if the toDo object exists
-                if (NullHelper.Exists(toDo))
-                {
-                    // Create a new instance of a 'Gateway' object, and set the connectionName
-                    Gateway gateway = new Gateway(Connection.Name);
-                    
-                    // load the sites
-                    saved = gateway.SaveToDo(ref toDo);
-                }
+                // Create a new instance of a 'Gateway' object, and set the connectionName
+                Gateway gateway = new Gateway(Connection.Name);
+                
+                // load the sites
+                saved = gateway.SaveToDo(ref toDo);
                 
                 // return the value of saved
                 return Task.FromResult(saved);

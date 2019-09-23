@@ -65,7 +65,7 @@ namespace ObjectLibrary.BusinessObjects
                     // set the value
                     isDone = value;
 
-                    // if the Callback exists and changes exist
+                    // if the Callback exists and changes occurred
                     if ((HasCallback) && (hasChanges))
                     {
                         // Set the Callback

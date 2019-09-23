@@ -3,7 +3,7 @@
 @using DataJuggler.UltimateHelper.Core
 @using System.Collections.Generic
 @using ObjectLibrary.BusinessObjects
-@using BlazorToDo.Data.Services
+@using DataGateway.Services;
 @inject ToDoService ToDoService
 
 @if (ListHelper.HasOneOrMoreItems(todos))
@@ -65,8 +65,14 @@ else
         // if the Title exists
         if (TextHelper.Exists(newTodoTitle))
         {
+            // create a new ToDo object
+            ToDo toDo = new ToDo();
+
+            // set the newToDoTitle
+            toDo.Title = newTodoTitle;
+
             // Create a new ToDo
-            saved = await ToDoService.CreateToDo(newTodoTitle);
+            saved = await ToDoService.SaveToDo(ref  toDo);
 
             // if saved
             if (saved)

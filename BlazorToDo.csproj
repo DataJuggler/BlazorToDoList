@@ -12,13 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Data\Services\Connection.cs" />
-    <Compile Include="Data\Services\ToDoDataWatcher.cs" />
-    <Compile Include="Data\Services\ToDoService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="DataJuggler.Net.Core" Version="2.0.8-Rc1" />
+    <PackageReference Include="DataJuggler.Net.Core" Version="2.0.11-Rc1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-rc1.19456.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0-rc1-19462-10" />
   </ItemGroup>
@@ -26,6 +20,10 @@
   <ItemGroup>
     <ProjectReference Include="Data\DataGateway\DataGateway.csproj" />
     <ProjectReference Include="Data\ObjectLibrary\ObjectLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\SQL\" />
   </ItemGroup>
 
 </Project>

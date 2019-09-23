@@ -1,6 +1,6 @@
 ﻿
 
-namespace BlazorToDo.Data.Services
+namespace ApplicationLogicComponent.Connection
 {
 
     #region class Connection
